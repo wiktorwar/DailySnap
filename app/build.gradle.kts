@@ -36,6 +36,12 @@ android {
     buildFeatures {
         compose = true
     }
+    testOptions {
+        unitTests {
+            //All usages of Compose in Android unit tests will require this be set.
+            isReturnDefaultValues = true
+        }
+    }
 }
 
 dependencies {
@@ -61,6 +67,7 @@ dependencies {
     testImplementation(libs.assertk)
     testImplementation(libs.junit)
     testImplementation(libs.turbine)
+    testImplementation(libs.kotlin.coroutines.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
