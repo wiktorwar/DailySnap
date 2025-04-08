@@ -1,5 +1,6 @@
 package com.wiktorwar.dailysnap.feature.prompt
 
+import android.Manifest
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -7,6 +8,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import app.cash.molecule.RecompositionMode
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberPermissionState
 import com.wiktorwar.dailysnap.data.concurrency.DispatcherProvider
 import com.wiktorwar.dailysnap.data.usecase.TodayPromptUseCase
 import com.wiktorwar.dailysnap.feature.base.BaseViewModel
@@ -24,6 +27,7 @@ class PromptViewModel @Inject constructor(
     dispatcherProvider: DispatcherProvider,
 ) : BaseViewModel<PromptIntent, PromptViewState>(recompositionMode, dispatcherProvider) {
 
+    @OptIn(ExperimentalPermissionsApi::class)
     @Composable
     override fun states(intents: Flow<PromptIntent>): PromptViewState {
         var viewState by remember { mutableStateOf(PromptViewState()) }
@@ -39,7 +43,8 @@ class PromptViewModel @Inject constructor(
                         }
                     }
 
-                    TakePicture -> TODO()
+                    TakePicture -> {
+                    }
                 }
             }
         }

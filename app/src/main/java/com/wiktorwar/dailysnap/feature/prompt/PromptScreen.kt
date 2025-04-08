@@ -1,6 +1,13 @@
 package com.wiktorwar.dailysnap.feature.prompt
 
-import androidx.compose.foundation.layout.*
+import android.Manifest
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -15,8 +22,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
 import kotlinx.coroutines.delay
 
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun PromptScreen(
     state: PromptViewState,
@@ -56,9 +67,17 @@ fun PromptScreen(
                     modifier = Modifier.padding(bottom = 24.dp)
                 )
             }
+            val cameraPermissionState = rememberPermissionState(Manifest.permission.CAMERA)
 
             Button(
-                onClick = { onIntent(PromptIntent.TakePicture) },
+                onClick = {
+                    cameraPermissionState.launchPermissionRequest()
+                    if (cameraPermissionState.status.isGranted) {
+                        onIntent(PromptIntent.TakePicture)
+                    } else {
+                        cameraPermissionState.launchPermissionRequest()
+                    }
+                },
                 shape = RoundedCornerShape(16.dp),
                 modifier = Modifier
                     .fillMaxWidth()
