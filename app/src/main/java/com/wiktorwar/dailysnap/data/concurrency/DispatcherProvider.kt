@@ -1,4 +1,4 @@
-package com.wiktorwar.dailysnap.di
+package com.wiktorwar.dailysnap.data.concurrency
 
 import kotlin.coroutines.CoroutineContext
 

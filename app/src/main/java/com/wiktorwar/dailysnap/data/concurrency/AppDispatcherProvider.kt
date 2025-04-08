@@ -1,7 +1,6 @@
-package com.wiktorwar.dailysnap.di
+package com.wiktorwar.dailysnap.data.concurrency
 
 import androidx.compose.ui.platform.AndroidUiDispatcher
-import com.wiktorwar.dailysnap.di.DispatcherProvider
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext

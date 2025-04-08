@@ -1,12 +1,13 @@
 package com.wiktorwar.dailysnap.di
 
 import app.cash.molecule.RecompositionMode
+import com.wiktorwar.dailysnap.data.concurrency.AppDispatcherProvider
+import com.wiktorwar.dailysnap.data.concurrency.DispatcherProvider
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.CoroutineScope
 
 @Module
 @InstallIn(SingletonComponent::class)

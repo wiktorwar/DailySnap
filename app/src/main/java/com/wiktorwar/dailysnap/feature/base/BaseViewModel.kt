@@ -1,11 +1,13 @@
 package com.wiktorwar.dailysnap.feature.base
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.AndroidUiDispatcher
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.cash.molecule.RecompositionMode
 import app.cash.molecule.launchMolecule
-import com.wiktorwar.dailysnap.di.DispatcherProvider
+import com.wiktorwar.dailysnap.data.concurrency.DispatcherProvider
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,9 +19,11 @@ import kotlinx.coroutines.flow.StateFlow
  * Class is based of [the molecule sample] (https://github.com/cashapp/molecule/blob/trunk/sample-viewmodel/src/main/java/com/example/molecule/viewmodel/MoleculeViewModel.kt)
  */
 abstract class BaseViewModel<Intent, ViewState>(
-    dispatcherProvider: DispatcherProvider,
     recompositionMode: RecompositionMode,
+    dispatcherProvider: DispatcherProvider
 ) : ViewModel() {
+
+    private val scope = CoroutineScope(viewModelScope.coroutineContext + dispatcherProvider.main)
 
     // Events have a capacity large enough to handle simultaneous UI events, but
     // small enough to surface issues if they get backed up for some reason.
@@ -28,7 +32,7 @@ abstract class BaseViewModel<Intent, ViewState>(
     val viewStates: StateFlow<ViewState>
 
     init {
-        viewStates = viewModelScope.launchMolecule(mode = recompositionMode) {
+        viewStates = scope.launchMolecule(mode = recompositionMode) {
             states(events)
         }
     }
