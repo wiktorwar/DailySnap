@@ -185,8 +185,8 @@ fun CameraScreen(
                         .fillMaxWidth()
                         .background(Color.White.copy(alpha = 0.9f), RoundedCornerShape(24.dp)),
                     colors = OutlinedTextFieldDefaults.colors(
-                        unfocusedBorderColor = Color.Transparent,
-                        focusedBorderColor = Color.Transparent
+                        focusedTextColor = Color.Black,
+                        unfocusedTextColor = Color.Black
                     ),
                     singleLine = true,
                     shape = RoundedCornerShape(24.dp)
