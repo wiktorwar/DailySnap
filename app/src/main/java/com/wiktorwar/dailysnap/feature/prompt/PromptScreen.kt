@@ -71,12 +71,14 @@ fun PromptScreen(
 
             Button(
                 onClick = {
-                    cameraPermissionState.launchPermissionRequest()
-                    if (cameraPermissionState.status.isGranted) {
-                        onIntent(PromptIntent.TakePicture)
-                    } else {
-                        cameraPermissionState.launchPermissionRequest()
-                    }
+                    onIntent(PromptIntent.TakePicture)
+//
+//                    cameraPermissionState.launchPermissionRequest()
+//                    if (cameraPermissionState.status.isGranted) {
+//                        onIntent(PromptIntent.TakePicture)
+//                    } else {
+//                        cameraPermissionState.launchPermissionRequest()
+//                    }
                 },
                 shape = RoundedCornerShape(16.dp),
                 modifier = Modifier
