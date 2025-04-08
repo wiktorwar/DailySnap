@@ -62,6 +62,8 @@ dependencies {
     implementation(libs.molecule)
     implementation(libs.hilt.android)
     implementation(libs.navigation.compose)
+    implementation(libs.coil.compose)
+    implementation(libs.systemuicontroller)
 
     ksp(libs.hilt.compiler)
 
